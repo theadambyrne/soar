@@ -44,13 +44,14 @@ export default function Component() {
 							<div className="flex flex-col justify-center space-y-4">
 								<div className="space-y-2">
 									<h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-										Dynamic systems <br />
+										Craft to Cloud <br />
 										for all things flight
 									</h1>
 									<p className="max-w-[600px] text-neutral-500 md:text-xl dark:text-neutral-400">
-										Products for the next generation prototyping compatible with
-										drones, low-flying aircraft and high powered rockets. Soar
-										to new heights with our <b>Craft to Cloud</b> platform.
+										Prototype and test your vehicles with our Craft to Cloud
+										platform. Develop your next big idea for{" "}
+										<b>Drones, Low flying aircraft, and High powered rockets</b>{" "}
+										with Soar.
 									</p>
 								</div>
 								<div className="flex flex-col gap-2 min-[400px]:flex-row">
