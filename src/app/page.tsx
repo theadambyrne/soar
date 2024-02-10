@@ -39,7 +39,7 @@ export default function Component() {
 								alt="Space shuttle wireframe"
 								width={600}
 								height={600}
-								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square"
+								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square dark:invert"
 							/>
 							<div className="flex flex-col justify-center space-y-4">
 								<div className="space-y-2">
