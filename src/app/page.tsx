@@ -6,8 +6,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Send, Network, Zap, CircuitBoard } from "lucide-react";
+import { getUserAuth } from "@/lib/auth/utils";
 
-export default function Component() {
+export default async function Component() {
+	const session = await getUserAuth();
+
 	return (
 		<div className="flex flex-col min-h-screen">
 			<header className="px-4 lg:px-6 h-20 flex items-center">
@@ -16,18 +19,29 @@ export default function Component() {
 					<span className="text-2xl font-semibold ml-4">Soar</span>
 				</Link>
 				<nav className="ml-auto flex gap-4 sm:gap-6">
-					<Link
-						className="text-lg font-medium hover:underline underline-offset-4"
-						href="#products"
-					>
-						Products
-					</Link>
-					<Link
-						className="text-lg font-medium hover:underline underline-offset-4"
-						href="/sign-in"
-					>
-						Sign In
-					</Link>
+					{session.session ? (
+						<Link
+							className="text-lg font-medium hover:underline underline-offset-4"
+							href="/dashboard"
+						>
+							Dashboard
+						</Link>
+					) : (
+						<>
+							<Link
+								className="text-lg font-medium hover:underline underline-offset-4"
+								href="/sign-in"
+							>
+								Sign In
+							</Link>
+							<Link
+								className="text-lg font-medium hover:underline underline-offset-4"
+								href="/sign-up"
+							>
+								Sign Up
+							</Link>
+						</>
+					)}
 				</nav>
 			</header>
 			<main className="flex-1">
