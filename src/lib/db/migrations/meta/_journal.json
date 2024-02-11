@@ -15,6 +15,13 @@
       "when": 1707426046100,
       "tag": "0001_hot_the_fallen",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1707668928809,
+      "tag": "0002_melted_ogun",
+      "breakpoints": true
     }
   ]
 }

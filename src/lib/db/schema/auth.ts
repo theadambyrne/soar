@@ -6,6 +6,7 @@ export const users = sqliteTable("user", {
 	name: text("name"),
 	email: text("email"),
 	username: text("username"),
+	role: text("role"),
 });
 
 export const sessions = sqliteTable("user_session", {
@@ -14,11 +15,11 @@ export const sessions = sqliteTable("user_session", {
 		.notNull()
 		.references(() => users.id),
 	activeExpires: blob("active_expires", {
-		mode: "bigint"
+		mode: "bigint",
 	}).notNull(),
 	idleExpires: blob("idle_expires", {
-		mode: "bigint"
-	}).notNull()
+		mode: "bigint",
+	}).notNull(),
 });
 
 export const keys = sqliteTable("user_key", {
@@ -26,5 +27,5 @@ export const keys = sqliteTable("user_key", {
 	userId: text("user_id")
 		.notNull()
 		.references(() => users.id),
-	hashedPassword: text("hashed_password")
+	hashedPassword: text("hashed_password"),
 });

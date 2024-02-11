@@ -71,6 +71,7 @@ export const POST = async (request: NextRequest) => {
 				username,
 				name: name,
 				email: email,
+				role: "user",
 			},
 		});
 		const session = await auth.createSession({
