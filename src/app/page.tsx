@@ -8,6 +8,8 @@ import Image from "next/image";
 import { Send, Network, Zap, CircuitBoard } from "lucide-react";
 import { getUserAuth } from "@/lib/auth/utils";
 
+import SignOutLink from "@/components/auth/SignOutLink";
+
 export default async function Component() {
 	const session = await getUserAuth();
 
@@ -20,12 +22,15 @@ export default async function Component() {
 				</Link>
 				<nav className="ml-auto flex gap-4 sm:gap-6">
 					{session.session ? (
-						<Link
-							className="text-lg font-medium hover:underline underline-offset-4"
-							href="/dashboard"
-						>
-							Dashboard
-						</Link>
+						<>
+							<Link
+								className="text-lg font-medium hover:underline underline-offset-4"
+								href="/dashboard"
+							>
+								Dashboard
+							</Link>
+							<SignOutLink />
+						</>
 					) : (
 						<>
 							<Link
