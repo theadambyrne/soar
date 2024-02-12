@@ -109,8 +109,8 @@ export default async function Home() {
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								{activityList.map((activity) => (
-									<TableRow>
+								{activityList.map((activity, key) => (
+									<TableRow key={key}>
 										<TableCell className="font-small">
 											{activity.timestamp.toLocaleDateString() +
 												" " +
