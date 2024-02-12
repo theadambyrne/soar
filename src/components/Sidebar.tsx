@@ -55,7 +55,7 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
 					</AvatarFallback>
 				</Avatar>
 			</div>
-			<div className="flex items-center justify-center w-full border-t border-border pt-4 px-2">
+			<div className="flex items-center justify-center w-full border-t border-border dark:border-gray-600 pt-4 px-2">
 				<div className="text-red-500 text-xs">
 					<SignOutLink />
 				</div>
