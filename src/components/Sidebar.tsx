@@ -45,7 +45,7 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
 					<p className="text-xs font-light pr-4">{user.email ?? "loading.."}</p>
 				</div>
 				<Avatar className="h-10 w-10">
-					<AvatarFallback className="border-border border-2 text-muted-foreground">
+					<AvatarFallback className="border-border border-2 text-muted-foreground dark:border-gray-600 ">
 						{user.name
 							? user.name
 									?.split(" ")
