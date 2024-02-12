@@ -1,6 +1,8 @@
 import { redirect } from "next/navigation";
 import { getPageSession } from "@/lib/auth/lucia";
 
+import { db } from "@/lib/db/index";
+
 export type AuthSession = {
 	session: {
 		user: {
@@ -31,4 +33,15 @@ export const getUserAuth = async (): Promise<AuthSession> => {
 export const checkAuth = async () => {
 	const session = await getPageSession();
 	if (!session) redirect("/sign-in");
+};
+
+export const checkAdmin = async () => {
+	const session = await getPageSession();
+	if (!session || session.user?.role !== "admin") redirect("/");
+};
+
+export const isAdmin = async () => {
+	const session = await getPageSession();
+	if (!session) return false;
+	return session.user?.role === "admin";
 };

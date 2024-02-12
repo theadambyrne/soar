@@ -1,4 +1,3 @@
-import AuthForm from "@/components/auth/Form";
 import { Card } from "@/components/ui/card";
 import {
 	Table,
@@ -10,7 +9,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 
-import { Badge, Radio } from "lucide-react";
+import { Radio } from "lucide-react";
 
 export default async function Home() {
 	return (
@@ -101,8 +100,6 @@ export default async function Home() {
 					</div>
 				</Card>
 			</div>
-
-			<AuthForm action="/api/sign-out" />
 		</main>
 	);
 }

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, Shield } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { defaultLinks } from "@/config/nav";
@@ -14,10 +14,10 @@ export interface SidebarLink {
 	icon: LucideIcon;
 }
 
-const SidebarItems = () => {
+const SidebarItems = ({ isAdmin }: { isAdmin: boolean }) => {
 	return (
 		<>
-			<SidebarLinkGroup links={defaultLinks} />
+			<SidebarLinkGroup links={defaultLinks} isAdmin={isAdmin} />
 			{/* {additionalLinks.length > 0
         ? additionalLinks.map((l) => (
             <SidebarLinkGroup
@@ -37,14 +37,23 @@ const SidebarLinkGroup = ({
 	links,
 	title,
 	border,
+	isAdmin,
 }: {
 	links: SidebarLink[];
 	title?: string;
 	border?: boolean;
+	isAdmin?: boolean;
 }) => {
 	const fullPathname = usePathname();
 	const pathname = "/" + fullPathname.split("/")[1];
 
+	if (isAdmin && !links.some((l) => l.title === "Admin")) {
+		links.push({
+			href: "/admin",
+			title: "Admin",
+			icon: Shield,
+		});
+	}
 	return (
 		<div className={border ? "border-border border-t my-8 pt-4" : ""}>
 			{title ? (

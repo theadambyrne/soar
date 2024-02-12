@@ -4,10 +4,13 @@ import SidebarItems from "./SidebarItems";
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Send } from "lucide-react";
 
-import { AuthSession, getUserAuth } from "@/lib/auth/utils";
+import { AuthSession, getUserAuth, isAdmin } from "@/lib/auth/utils";
+import SignOutLink from "./auth/SignOutLink";
 
 const Sidebar = async () => {
 	const session = await getUserAuth();
+	const isAdminUser = await isAdmin();
+
 	if (session.session === null) return null;
 
 	return (
@@ -18,7 +21,7 @@ const Sidebar = async () => {
 						<Send className="w-6 h-6" />
 						<h3 className="text-2xl font-semibold ml-4">Soar</h3>
 					</Link>
-					<SidebarItems />
+					<SidebarItems isAdmin={isAdminUser} />
 				</div>
 				<UserDetails session={session} />
 			</div>
@@ -36,7 +39,7 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
 
 	return (
 		<Link href="/account">
-			<div className="flex items-center justify-between w-full border-t border-border pt-4 px-2">
+			<div className="flex items-center justify-between w-full py-4 px-2">
 				<div className="text-muted-foreground">
 					<p className="text-xs">{user.name ?? "loading..."}</p>
 					<p className="text-xs font-light pr-4">{user.email ?? "loading.."}</p>
@@ -51,6 +54,11 @@ const UserDetails = ({ session }: { session: AuthSession }) => {
 							: "~"}
 					</AvatarFallback>
 				</Avatar>
+			</div>
+			<div className="flex items-center justify-center w-full border-t border-border pt-4 px-2">
+				<div className="text-red-500 text-xs">
+					<SignOutLink />
+				</div>
 			</div>
 		</Link>
 	);
