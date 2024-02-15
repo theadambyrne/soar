@@ -1,0 +1,1 @@
+ALTER TABLE flights ADD `device_id` text NOT NULL;
