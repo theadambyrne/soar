@@ -11,7 +11,10 @@ import {
 
 import { Radio } from "lucide-react";
 
+import { getDevices } from "@/lib/api/devices/queries";
 export default async function Home() {
+	const { devices } = await getDevices();
+
 	return (
 		<main className="">
 			<h1 className="text-3xl font-semibold my-2">Dashboard</h1>
@@ -60,41 +63,32 @@ export default async function Home() {
 								<TableRow>
 									<TableHead className="w-[100px]">#</TableHead>
 									<TableHead>Model</TableHead>
-									<TableHead>Last used</TableHead>
+									<TableHead>Created At</TableHead>
 									<TableHead>Status</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								<TableRow>
-									<TableCell className="font-medium">SR-0003</TableCell>
-									<TableCell>Soar FC1</TableCell>
-									<TableCell>12th April 2024</TableCell>
-									<TableCell>
-										<div className="inline-block rounded-lg bg-green-600 px-3 py-1 text-sm text-white">
-											Live
-										</div>
-									</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell className="font-medium">SR-0002</TableCell>
-									<TableCell>Soar FC1 (demo)</TableCell>
-									<TableCell>12th March 2024</TableCell>
-									<TableCell>
-										<div className="inline-block rounded-lg bg-blue-400 px-3 py-1 text-sm text-white">
-											Idle
-										</div>
-									</TableCell>
-								</TableRow>
-								<TableRow>
-									<TableCell className="font-medium">SR-0001</TableCell>
-									<TableCell>Soar FC1 (prototype)</TableCell>
-									<TableCell>12th February 2024</TableCell>
-									<TableCell>
-										<div className="inline-block rounded-lg bg-gray-600 px-3 py-1 text-sm text-white">
-											Unknown
-										</div>
-									</TableCell>
-								</TableRow>
+								{devices.map((device) => (
+									<TableRow>
+										<TableCell className="font-medium">
+											{device.serial}
+										</TableCell>
+										<TableCell>{device.name}</TableCell>
+										<TableCell>{device.createdAt}</TableCell>
+										<TableCell>
+											{new Date(device.updatedAt).getTime() <
+											Date.now() - 300000 ? (
+												<div className="inline-block rounded-lg bg-green-500 px-3 py-1 text-sm text-white">
+													Online
+												</div>
+											) : (
+												<div className="inline-block rounded-lg bg-red-500 px-3 py-1 text-sm text-white">
+													Offline
+												</div>
+											)}
+										</TableCell>
+									</TableRow>
+								))}
 							</TableBody>
 						</Table>
 					</div>
