@@ -2,6 +2,7 @@
 import { CompleteFlight } from "@/lib/db/schema/flights";
 import { trpc } from "@/lib/trpc/client";
 import FlightModal from "./FlightModal";
+import { Device, devices } from "@/lib/db/schema/devices";
 
 export default function FlightList({ flights }: { flights: CompleteFlight[] }) {
 	const { data: f } = trpc.flights.getFlights.useQuery(undefined, {
@@ -23,6 +24,11 @@ export default function FlightList({ flights }: { flights: CompleteFlight[] }) {
 }
 
 const Flight = ({ flight }: { flight: CompleteFlight }) => {
+	const { data: devices } =
+		trpc.devices.getDevices.useQuery(undefined, {
+			refetchOnMount: false,
+		}) ?? ({ devices: [] } as { devices: Device[] });
+
 	return (
 		<li className="flex justify-between my-2">
 			<div className="w-full">
@@ -31,9 +37,14 @@ const Flight = ({ flight }: { flight: CompleteFlight }) => {
 						" " +
 						flight.recordedAt.toDateString()}
 				</h3>
-				<p className="text-sm text-muted-foreground">
-					{flight.computer} - {flight.data}
-				</p>
+				{devices === undefined ? (
+					<p className="text-sm text-muted-foreground">Loading...</p>
+				) : (
+					<p className="text-sm text-muted-foreground">
+						{devices.devices.find((d) => flight.deviceId === d.id)?.name} -{" "}
+						{flight.data}
+					</p>
+				)}
 			</div>
 			<FlightModal flight={flight} />
 		</li>

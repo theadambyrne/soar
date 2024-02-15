@@ -5,6 +5,9 @@ import {
 	NewFlightParams,
 	insertFlightParams,
 } from "@/lib/db/schema/flights";
+
+import { Device } from "@/lib/db/schema/devices";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -44,6 +47,11 @@ const FlightForm = ({
 	const router = useRouter();
 	const utils = trpc.useContext();
 
+	const { data: devices } =
+		trpc.devices.getDevices.useQuery(undefined, {
+			refetchOnMount: false,
+		}) ?? ({ devices: [] } as { devices: Device[] });
+
 	const form = useForm<z.infer<typeof insertFlightParams>>({
 		// latest Zod release has introduced a TS error with zodResolver
 		// open issue: https://github.com/colinhacks/zod/issues/2663
@@ -51,8 +59,6 @@ const FlightForm = ({
 		resolver: zodResolver(insertFlightParams),
 		defaultValues: flight ?? {
 			recordedAt: new Date(),
-			data: "",
-			computer: "",
 		},
 	});
 
@@ -163,20 +169,35 @@ const FlightForm = ({
 						</FormItem>
 					)}
 				/>
+
 				<FormField
 					control={form.control}
-					name="computer"
+					name="deviceId"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Computer</FormLabel>
+							<FormLabel>Device</FormLabel>
 							<FormControl>
-								<Input {...field} />
+								<select {...field} className="w-full">
+									<option value={""}>Select a device</option>
+									{devices === undefined ? (
+										<option disabled>Loading...</option>
+									) : (
+										<>
+											{devices.devices.map((device) => (
+												<option key={device.id} value={device.id}>
+													{device.name}
+												</option>
+											))}
+										</>
+									)}
+								</select>
 							</FormControl>
 
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
+
 				<Button
 					type="submit"
 					className="mr-1"

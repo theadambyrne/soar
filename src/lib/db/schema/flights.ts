@@ -19,7 +19,6 @@ export const flights = sqliteTable(
 			.$defaultFn(() => nanoid()),
 		recordedAt: integer("recorded_at", { mode: "timestamp" }).notNull(),
 		data: text("data").notNull(),
-		computer: text("computer").notNull(),
 		userId: text("user_id").notNull(),
 		deviceId: text("device_id").notNull(),
 	},

@@ -36,6 +36,13 @@
       "when": 1707990643654,
       "tag": "0004_many_the_fury",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1707993282362,
+      "tag": "0005_bent_angel",
+      "breakpoints": true
     }
   ]
 }
