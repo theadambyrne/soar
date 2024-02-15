@@ -37,6 +37,7 @@ import { toast } from "sonner";
 
 const FlightForm = ({
 	flight,
+
 	closeModal,
 }: {
 	flight?: Flight;
@@ -155,14 +156,22 @@ const FlightForm = ({
 						</FormItem>
 					)}
 				/>
+
 				<FormField
 					control={form.control}
 					name="data"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Data</FormLabel>
+							<FormLabel>Data file</FormLabel>
+
 							<FormControl>
-								<Input {...field} />
+								{editing ? (
+									<div className="flex items-center space-x-2">
+										<span>{flight?.data}</span>
+									</div>
+								) : (
+									<Input type="file" {...field} />
+								)}
 							</FormControl>
 
 							<FormMessage />
