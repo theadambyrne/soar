@@ -61,6 +61,13 @@ const DeviceForm = ({
 		toast.success(`Device ${action}d!`);
 	};
 
+	const onError = (
+		action: "create" | "update" | "delete",
+		data: { error: string }
+	) => {
+		toast.error(`Failed to ${action} device: ${data.error}`);
+	};
+
 	const { mutate: createDevice, isLoading: isCreating } =
 		trpc.devices.createDevice.useMutation({
 			onSuccess: (res) => onSuccess("create"),
