@@ -1,10 +1,6 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/PmwTvNfrVgf
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
 import Link from "next/link";
-import { Send, Construction } from "lucide-react";
+import Image from "next/image";
+import { Send, Footprints } from "lucide-react";
 import { getUserAuth } from "@/lib/auth/utils";
 
 import SignOutLink from "@/components/auth/SignOutLink";
@@ -15,7 +11,7 @@ export default async function Component() {
 	return (
 		<div className="flex min-h-screen flex-col">
 			<header className="flex h-20 items-center px-4 lg:px-6">
-				<Link className="flex items-center justify-center" href="#">
+				<Link className="flex items-center justify-center" href="/">
 					<Send className="h-6 w-6" />
 					<span className="ml-4 text-2xl font-semibold">Soar</span>
 				</Link>
@@ -52,21 +48,63 @@ export default async function Component() {
 				<section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
 					<div className="container px-4 md:px-6">
 						<div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
-							<div className="flex flex-col justify-center">
+							<Image
+								src="/Ladder.svg"
+								alt="Ladder sketch"
+								width={300}
+								height={300}
+								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square dark:invert"
+							/>
+							<div className="flex flex-col space-y-4">
 								<div className="space-y-2">
-									<h1 className="flex text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
-										<Construction size={64} className="mr-3" /> Roadmap
+									<h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none flex">
+										<Footprints size={64} className="mr-3" />
+										Roadmap
 									</h1>
-									<p className="max-w-[600px] text-neutral-500 md:text-xl dark:text-neutral-400">
-										Prototype and test your vehicles with our Craft to Cloud
-										platform. Develop your next big idea for{" "}
-										<b>Drones, Low flying aircraft, and High powered rockets</b>{" "}
-										with Soar.
+									<p className="max-w-[700px] text-neutral-600 md:text-xl dark:text-neutral-400 py-4">
+										Follow the growth of Soar and see what's coming next. We are
+										excited to show our process and how we are building the
+										future of flight electronics.
 									</p>
+
+									<ol className="space-y-2">
+										<li>
+											<p className="text-lg font-semibold">Cycle 1</p>
+											<p className="text-neutral-500 dark:text-neutral-400">
+												We are excited to announce the first cycle of Soar. We
+												are working on the following features and updates:
+											</p>
+										</li>
+										<li>
+											<p className="text-lg font-semibold">Cycle 2</p>
+											<p className="text-neutral-500 dark:text-neutral-400">
+												We are excited to announce the first cycle of Soar. We
+												are working on the following features and updates:
+											</p>
+										</li>
+										<li>
+											<p className="text-lg font-semibold">Cycle 3</p>
+											<p className="text-neutral-500 dark:text-neutral-400">
+												We are excited to announce the first cycle of Soar. We
+												are working on the following features and updates:
+											</p>
+										</li>
+									</ol>
 								</div>
 							</div>
 						</div>
 					</div>
+				</section>
+
+				<section className="w-full py-12 md:py-24 lg:py-32">
+					<h1 className="text-3xl font-bold tracking-tighter text-center md:text-4xl">
+						Cycle 1
+					</h1>
+
+					<p>
+						We are excited to announce the first cycle of Soar. We are working
+						on the following features and updates:
+					</p>
 				</section>
 
 				<section className="w-full border-t py-12 md:py-24 lg:py-32">
