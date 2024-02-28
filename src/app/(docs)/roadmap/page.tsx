@@ -62,9 +62,9 @@ export default async function Component() {
 										Roadmap
 									</h1>
 									<p className="max-w-[700px] text-neutral-600 md:text-xl dark:text-neutral-400 py-4">
-										Follow the growth of Soar and see what's coming next. We are
-										excited to show our process and how we are building the
-										future of flight electronics.
+										Follow the growth of Soar and see what&apos;s coming next.
+										We are excited to show our process and how we are building
+										the future of flight electronics.
 									</p>
 
 									<ol className="space-y-4 pt-2">
@@ -81,7 +81,8 @@ export default async function Component() {
 											<p className="text-lg font-semibold">The Future</p>
 											<p className="text-neutral-500 dark:text-neutral-400">
 												Soar will expand its R&D efforts specifically in the
-												Computer Vision space to deliver Soar's 2nd product.
+												Computer Vision space to deliver Soar&apos;s 2nd
+												product.
 											</p>
 										</li>
 									</ol>
