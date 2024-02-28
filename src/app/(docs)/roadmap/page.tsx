@@ -49,11 +49,11 @@ export default async function Component() {
 					<div className="container px-4 md:px-6">
 						<div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
 							<Image
-								src="/Ladder.svg"
-								alt="Ladder sketch"
+								src="/map.svg"
+								alt="Map sketch"
 								width={300}
 								height={300}
-								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square dark:invert"
+								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square dark:invert p-20"
 							/>
 							<div className="flex flex-col space-y-4">
 								<div className="space-y-2">
@@ -67,26 +67,21 @@ export default async function Component() {
 										future of flight electronics.
 									</p>
 
-									<ol className="space-y-2">
+									<ol className="space-y-4 pt-2">
 										<li>
-											<p className="text-lg font-semibold">Cycle 1</p>
+											<p className="text-lg font-semibold">Cycle 1 - MVP</p>
 											<p className="text-neutral-500 dark:text-neutral-400">
-												We are excited to announce the first cycle of Soar. We
-												are working on the following features and updates:
+												Soar began from a college project to create a cloud
+												first HCI device. At Soar our MVP is a Flight Computer
+												with a Live Cloud Dashboard. Removing the need for a
+												ground station with a cloud centric approach.
 											</p>
 										</li>
 										<li>
-											<p className="text-lg font-semibold">Cycle 2</p>
+											<p className="text-lg font-semibold">The Future</p>
 											<p className="text-neutral-500 dark:text-neutral-400">
-												We are excited to announce the first cycle of Soar. We
-												are working on the following features and updates:
-											</p>
-										</li>
-										<li>
-											<p className="text-lg font-semibold">Cycle 3</p>
-											<p className="text-neutral-500 dark:text-neutral-400">
-												We are excited to announce the first cycle of Soar. We
-												are working on the following features and updates:
+												Soar will expand its R&D efforts specifically in the
+												Computer Vision space to deliver Soar's 2nd product.
 											</p>
 										</li>
 									</ol>
@@ -94,17 +89,6 @@ export default async function Component() {
 							</div>
 						</div>
 					</div>
-				</section>
-
-				<section className="w-full py-12 md:py-24 lg:py-32">
-					<h1 className="text-3xl font-bold tracking-tighter text-center md:text-4xl">
-						Cycle 1
-					</h1>
-
-					<p>
-						We are excited to announce the first cycle of Soar. We are working
-						on the following features and updates:
-					</p>
 				</section>
 
 				<section className="w-full border-t py-12 md:py-24 lg:py-32">
