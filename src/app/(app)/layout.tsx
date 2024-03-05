@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 import TrpcProvider from "@/lib/trpc/Provider";
 import { cookies } from "next/headers";
+
 export default async function AppLayout({
 	children,
 }: {
