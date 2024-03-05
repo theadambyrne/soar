@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 import { useTheme } from "next-themes";
 
 // eslint-disable-next-line @next/next/no-async-client-component
@@ -35,7 +36,7 @@ export default async function Page() {
 								(e.target as HTMLFormElement).message.value
 							);
 
-							const response = await fetch("/api/buckets", {
+							const response = await fetch("/api/support", {
 								method: "POST",
 								body: formData,
 							});
@@ -45,6 +46,8 @@ export default async function Page() {
 
 							(e.target as HTMLFormElement).file.value = [];
 							(e.target as HTMLFormElement).message.value = "";
+
+							toast.success("Message sent!");
 						}}
 						className="space-y-4 mt-4 p-4 rounded-md shadow-sm border border-muted-foreground dark:border-neutral-800 bg-white dark:bg-neutral-900 w-2/3"
 					>
