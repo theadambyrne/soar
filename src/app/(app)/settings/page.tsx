@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useTheme } from "next-themes";
 
+// eslint-disable-next-line @next/next/no-async-client-component
 export default async function Page() {
 	const { setTheme } = useTheme();
 
@@ -57,7 +58,7 @@ export default async function Page() {
 							/>
 
 							<Label htmlFor="file">Attach file</Label>
-							<Input id="file" type="file" accept=".csv" id="file" required />
+							<Input id="file" type="file" accept=".csv" required />
 							<Button type="submit">Submit</Button>
 						</div>
 					</form>
