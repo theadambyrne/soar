@@ -18,16 +18,6 @@ const SidebarItems = ({ isAdmin }: { isAdmin: boolean }) => {
 	return (
 		<>
 			<SidebarLinkGroup links={defaultLinks} isAdmin={isAdmin} />
-			{/* {additionalLinks.length > 0
-        ? additionalLinks.map((l) => (
-            <SidebarLinkGroup
-              links={l.links}
-              title={l.title}
-              border
-              key={l.title}
-            />
-          ))
-        : null} */}
 		</>
 	);
 };
