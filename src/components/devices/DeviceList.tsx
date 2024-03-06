@@ -3,22 +3,48 @@ import { CompleteDevice } from "@/lib/db/schema/devices";
 import { trpc } from "@/lib/trpc/client";
 import DeviceModal from "./DeviceModal";
 
+import { Input } from "../ui/input";
+import { useState, useEffect } from "react";
+
 export default function DeviceList({ devices }: { devices: CompleteDevice[] }) {
 	const { data: d } = trpc.devices.getDevices.useQuery(undefined, {
 		initialData: { devices },
 		refetchOnMount: false,
 	});
 
-	if (d.devices.length === 0) {
+	const [filteredDevices, setFilteredDevices] = useState(d.devices);
+
+	useEffect(() => {
+		setFilteredDevices(d.devices);
+	}, [d.devices]);
+
+	if (filteredDevices.length === 0) {
 		return <EmptyState />;
 	}
 
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const search = e.target.value;
+		setFilteredDevices(
+			d.devices.filter((device) =>
+				device.name.toLowerCase().includes(search.toLowerCase())
+			)
+		);
+	};
+
 	return (
-		<ul>
-			{d.devices.map((device) => (
-				<Device device={device} key={device.id} />
-			))}
-		</ul>
+		<div>
+			<Input
+				placeholder="Search devices"
+				type="text"
+				className="my-2"
+				onChange={(e) => handleSearch(e)}
+			/>
+			<ul>
+				{filteredDevices.map((device) => (
+					<Device device={device} key={device.id} />
+				))}
+			</ul>
+		</div>
 	);
 }
 
