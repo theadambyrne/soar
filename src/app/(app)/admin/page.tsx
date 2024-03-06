@@ -2,7 +2,6 @@ import { Card } from "@/components/ui/card";
 import {
 	Table,
 	TableBody,
-	TableCaption,
 	TableCell,
 	TableHead,
 	TableHeader,
@@ -11,43 +10,26 @@ import {
 
 import { checkAdmin } from "@/lib/auth/utils";
 
-import { Users, RadioReceiver, Activity } from "lucide-react";
-
-type Activity = {
-	timestamp: Date;
-	user: string; // user_id
-	action: string;
-	status: boolean;
-};
+import { Users, RadioReceiver, Activity, DownloadCloud } from "lucide-react";
+import Link from "next/link";
+import { Key } from "react";
 
 export default async function Home() {
 	await checkAdmin();
+	const tickets = await fetch("http://localhost:3000/api/messages").then(
+		(res) => res.json()
+	);
+
+	tickets.messages.sort((a: any, b: any) => { 
+		const dateA = new Date(a.createdAt);
+		const dateB = new Date(b.createdAt);
+		return dateB.getTime() - dateA.getTime();
+	});
 
 	const userCount = 11;
 	const adminCount = 1;
 	const liveCount = 2;
 	const deviceCount = 7;
-
-	const activityList: Activity[] = [
-		{
-			timestamp: new Date(),
-			user: "user123",
-			action: "Logged in",
-			status: true,
-		},
-		{
-			timestamp: new Date(),
-			user: "user456",
-			action: "Connect device",
-			status: true,
-		},
-		{
-			timestamp: new Date(),
-			user: "user789",
-			action: "Exported flight logs",
-			status: false,
-		},
-	];
 
 	return (
 		<main className="">
@@ -96,37 +78,47 @@ export default async function Home() {
 					<div id="body" className="p-4">
 						<div className="flex items-center">
 							<Activity className="mr-2" />
-							<h3 className="text-2xl font-semibold">Activity</h3>
+							<h3 className="text-2xl font-semibold">Support</h3>
 						</div>
 
 						<Table className="mt-8">
 							<TableHeader>
 								<TableRow>
-									<TableHead className="w-[100px]">Timestamp</TableHead>
+									<TableHead>Created</TableHead>
 									<TableHead>User</TableHead>
-									<TableHead>Action</TableHead>
-									<TableHead className="text-right">Status</TableHead>
+									<TableHead>Message</TableHead>
+									<TableHead>Artefact</TableHead>
 								</TableRow>
 							</TableHeader>
 							<TableBody>
-								{activityList.map((activity, key) => (
-									<TableRow key={key}>
-										<TableCell className="font-small">
-											{activity.timestamp.toLocaleDateString() +
-												" " +
-												activity.timestamp.toLocaleTimeString()}
-										</TableCell>
-										<TableCell>{activity.user}</TableCell>
-										<TableCell>{activity.action}</TableCell>
-										<TableCell className="flex justify-end">
-											{activity.status ? (
-												<div className="w-6 h-6 rounded-full bg-green-500"></div>
-											) : (
-												<div className="w-6 h-6 rounded-full bg-red-500"></div>
-											)}
-										</TableCell>
-									</TableRow>
-								))}
+								{tickets.messages.map(
+									(
+										ticket: {
+											createdAt: string;
+											userId: string;
+											content: string;
+											filepath: string;
+										},
+										key: Key
+									) => (
+										<TableRow key={key}>
+											<TableCell className="font-small">
+												{ticket.createdAt}
+											</TableCell>
+											<TableCell className="font-small">
+												{ticket.userId}
+											</TableCell>
+											<TableCell className="font-small">
+												{ticket.content}
+											</TableCell>
+											<TableCell className="font-small">
+												<Link href={ticket.filepath}>
+													<DownloadCloud />
+												</Link>
+											</TableCell>
+										</TableRow>
+									)
+								)}
 							</TableBody>
 						</Table>
 					</div>

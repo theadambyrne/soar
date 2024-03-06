@@ -6,15 +6,14 @@ import crypto from "crypto";
 import { Bucket } from "sst/node/bucket";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { Size } from "aws-cdk-lib/core";
 
-const uploadFile = async (url: string, file: File) => {
+const uploadFile = async (url: string, file: File, filename: String) => {
 	const image = await fetch(url, {
 		body: file,
 		method: "PUT",
 		headers: {
 			"Content-Type": file.type,
-			"Content-Disposition": `attachment; filename="${file.name}"`,
+			"Content-Disposition": `attachment; filename="${filename}"`,
 		},
 	});
 
@@ -36,19 +35,19 @@ export async function POST(request: Request) {
 	// Data needed for upload
 	const user_id = session.user.userId;
 	const file = formBody.get("file") as File;
-	const message = formBody.get("message");
 
 	const command = new PutObjectCommand({
-		ACL: "authenticated-read",
+		ACL: "public-read",
 		Key: crypto.randomUUID(),
 		Bucket: Bucket.public.bucketName,
 	});
 
 	const url = await getSignedUrl(new S3Client({}), command);
-	const res = await uploadFile(url, file);
+	const filename = user_id + "/" + file.name;
+	const res = await uploadFile(url, file, filename);
 
 	try {
-		return NextResponse.json({ user_id, res, message });
+		return NextResponse.json({ res });
 	} catch (error) {
 		return NextResponse.json({ error });
 	}

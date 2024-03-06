@@ -43,6 +43,13 @@
       "when": 1707993282362,
       "tag": "0005_bent_angel",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1709720214256,
+      "tag": "0006_smart_masque",
+      "breakpoints": true
     }
   ]
 }

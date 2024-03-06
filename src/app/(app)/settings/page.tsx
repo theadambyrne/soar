@@ -6,10 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useTheme } from "next-themes";
+import { useState } from "react";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Page() {
 	const { setTheme } = useTheme();
+
+	const [supportText, setSupportText] = useState("Submit");
 
 	return (
 		<div>
@@ -25,6 +28,7 @@ export default async function Page() {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
+							setSupportText("Uploading...");
 
 							const formData = new FormData();
 							formData.append(
@@ -35,19 +39,28 @@ export default async function Page() {
 								"message",
 								(e.target as HTMLFormElement).message.value
 							);
-
-							const response = await fetch("/api/support", {
+							const response = await fetch("/api/get-support", {
 								method: "POST",
 								body: formData,
 							});
 
 							const data = await response.json();
-							console.log(data);
+							toast.success("File uploaded to: " + data.res);
+
+							await fetch("/api/messages", {
+								method: "POST",
+								body: JSON.stringify({
+									content: (e.target as HTMLFormElement).message.value,
+									filepath: data.res,
+									userId: data.res.split("/")[0],
+								}),
+							});
+
+							setSupportText("Submit");
+							toast.success("Support ticket created");
 
 							(e.target as HTMLFormElement).file.value = [];
 							(e.target as HTMLFormElement).message.value = "";
-
-							toast.success("Message sent!");
 						}}
 						className="space-y-4 mt-4 p-4 rounded-md shadow-sm border border-muted-foreground dark:border-neutral-800 bg-white dark:bg-neutral-900 w-2/3"
 					>
@@ -62,7 +75,7 @@ export default async function Page() {
 
 							<Label htmlFor="file">Attach file</Label>
 							<Input id="file" type="file" accept=".csv" required />
-							<Button type="submit">Submit</Button>
+							<Button type="submit">{supportText}</Button>
 						</div>
 					</form>
 				</div>
