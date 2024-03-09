@@ -6,13 +6,34 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { useTheme } from "next-themes";
-import { useState } from "react";
+import { useState, useEffect, Key } from "react";
+
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+import Link from "next/link";
+import { DownloadCloud } from "lucide-react";
 
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Page() {
 	const { setTheme } = useTheme();
 
 	const [supportText, setSupportText] = useState("Submit");
+	const [messages, setMessages] = useState([]);
+
+	useEffect(() => {
+		const getMessages = async () => {
+			const res = await fetch("http://localhost:3000/api/get-support");
+			const data = await res.json();
+			setMessages(data.messages);
+		};
+		getMessages();
+	}, []);
 
 	return (
 		<div>
@@ -78,6 +99,46 @@ export default async function Page() {
 							<Button type="submit">{supportText}</Button>
 						</div>
 					</form>
+
+					<div className="space-y-4 mt-4 p-4 rounded-md shadow-sm border border-muted-foreground dark:border-neutral-800 bg-white dark:bg-neutral-900 w-2/3">
+						<h3 className="text-lg font-medium">Record of support</h3>
+						<Table>
+							<TableHeader>
+								<TableRow>
+									<TableHead>Created</TableHead>
+									<TableHead>Message</TableHead>
+									<TableHead>Artefact</TableHead>
+								</TableRow>
+							</TableHeader>
+							<TableBody>
+								{messages.map(
+									(
+										ticket: {
+											createdAt: string;
+											content: string;
+											filepath: string;
+										},
+										key: Key
+									) => (
+										<TableRow key={key}>
+											<TableCell className="font-small">
+												{ticket.createdAt}
+											</TableCell>
+
+											<TableCell className="font-small">
+												{ticket.content}
+											</TableCell>
+											<TableCell className="font-small justify-center">
+												<Link href={ticket.filepath}>
+													<DownloadCloud className="text-blue-500" />
+												</Link>
+											</TableCell>
+										</TableRow>
+									)
+								)}
+							</TableBody>
+						</Table>
+					</div>
 				</div>
 				<div>
 					<h3 className="text-lg font-medium">Appearance</h3>

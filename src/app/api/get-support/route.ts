@@ -6,6 +6,7 @@ import crypto from "crypto";
 import { Bucket } from "sst/node/bucket";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { getMessages } from "@/lib/api/messages/queries";
 
 const uploadFile = async (url: string, file: File, filename: String) => {
 	const image = await fetch(url, {
@@ -48,6 +49,23 @@ export async function POST(request: Request) {
 
 	try {
 		return NextResponse.json({ res });
+	} catch (error) {
+		return NextResponse.json({ error });
+	}
+}
+export async function GET(request: Request) {
+	const authRequest = auth.handleRequest(request.method, context);
+	const session = await authRequest.validate();
+	if (!session) {
+		return new Response(null, {
+			status: 401,
+		});
+	}
+
+	const messages_data = await getMessages();
+	const messages = messages_data.messages;
+	try {
+		return NextResponse.json({ messages });
 	} catch (error) {
 		return NextResponse.json({ error });
 	}

@@ -12,7 +12,6 @@ export default {
 		app.stack(function Site({ stack }: { stack: any }) {
 			const bucket = new Bucket(stack, "public");
 			const site = new NextjsSite(stack, "site", {
-				path: "src",
 				bind: [bucket],
 			});
 

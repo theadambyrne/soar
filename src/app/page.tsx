@@ -99,11 +99,12 @@ export default async function Component() {
 									Coming soon
 								</div>
 								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-									Flight Computer 1
+									Blackbox 1
 								</h2>
 								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
-									Craft to Cloud live streaming of flight data. No ground
-									station required. Powered by the RP2040 MCU from Raspberry Pi.
+									Blackbox for drone flight, low flying aircraft, and model
+									rockets. The device records motion data in flight and on
+									retrieval sends the data to your Soar Dashboard. 
 								</p>
 							</div>
 						</div>
@@ -118,14 +119,18 @@ export default async function Component() {
 												<h3 className="text-xl font-bold">Sensors</h3>
 											</div>
 
-											<p className="text-neutral-500 dark:text-neutral-400">
-												LMD6SOX Inertial Measurement Unit (IMU) with 6 DOF.
-												<br />
-												BMP390 Barometric Pressure Sensor for altitude
-												measurement.
-												<br />
-												GNSS GPS passive sensor for location.
-											</p>
+											<ul className="text-neutral-500 dark:text-neutral-400 space-y-2 mt-1">
+												<li>
+													<u>IMU</u> 6 DOF - 3 axis accelerometer and 3 axis
+													gyroscope
+												</li>
+												<li>
+													<u>Barometer</u> pressure sensor and altimeter
+												</li>
+												<li>
+													<u>GPS</u> GLONASS sensor for location tracking
+												</li>
+											</ul>
 										</div>
 									</li>
 									<li>
@@ -134,9 +139,9 @@ export default async function Component() {
 												<Network className="mr-3 h-8 w-8" />
 												<h3 className="text-xl font-bold">Communication</h3>
 											</div>
-											<p className="text-neutral-500 dark:text-neutral-400">
-												Over GSM the FC1 streams live flight data to the cloud
-												using our Craft to Cloud service.
+											<p className="text-neutral-500 dark:text-neutral-400 mt-1">
+												You can use a normal network or a phone hotspot via a 2.4GHz Wi-Fi module to connect to the
+												cloud
 											</p>
 										</div>
 									</li>
@@ -145,9 +150,10 @@ export default async function Component() {
 											<div className="flex items-center">
 												<Zap className="mr-3 h-8 w-8" />
 												<h3 className="text-xl font-bold">Power</h3>
-											</div>{" "}
-											<p className="text-neutral-500 dark:text-neutral-400">
-												9 Volt battery with 2 hours of continuous flight time.
+											</div>
+											<p className="text-neutral-500 dark:text-neutral-400 mt-1">
+												A 1000mAh LiPo battery powers the Blackbox for 2 hours.
+												You can also use a powerbank to extend the flight time
 											</p>
 										</div>
 									</li>
