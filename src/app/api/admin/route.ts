@@ -29,8 +29,10 @@ export async function GET(request: Request) {
 		return date > oneWeekAgo;
 	}).length;
 
+	const admins = userRows.filter((u) => u.role === "admin");
+
 	return new Response(
-		JSON.stringify({ userCount, flightCount, messagesTW, messages }),
+		JSON.stringify({ userCount, flightCount, messagesTW, messages, admins }),
 		{ status: 200 }
 	);
 }

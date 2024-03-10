@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import {
 	Table,
 	TableBody,
@@ -7,18 +9,27 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 import { checkAdmin } from "@/lib/auth/utils";
+import { getBaseUrl } from "@/lib/trpc/utils";
 
-import { Activity, DownloadCloud } from "lucide-react";
+import { Activity, DownloadCloud, Users } from "lucide-react";
 import Link from "next/link";
 import { Key } from "react";
 
 export default async function Home() {
 	await checkAdmin();
+	const burl = getBaseUrl();
 
-	const { userCount, flightCount, messagesTW, messages } = await fetch(
-		"http://localhost:3000/api/admin"
+	const { userCount, flightCount, messagesTW, messages, admins } = await fetch(
+		burl + "/api/admin"
 	).then((res) => res.json());
 
 	messages.messages.sort((a: any, b: any) => {
@@ -31,7 +42,52 @@ export default async function Home() {
 		<main className="">
 			<h1 className="text-3xl font-semibold my-2">Admin</h1>
 
-			<div className="grid grid-cols-1 gap-4 my-10 wrap-cols">
+			<div className="grid grid-cols-2 gap-4 my-10 wrap-cols">
+				<Card>
+					<div id="body" className="p-4">
+						<div className="flex items-center">
+							<Users className="mr-2" />
+							<h3 className="text-2xl font-semibold">Manage users</h3>
+						</div>
+
+						<div className="grid grid-cols-2 gap-4 mt-8">
+							<form action={burl + "/api/admin/add"} method="POST">
+								<label htmlFor="email" className="block mt-4 w-full">
+									Email
+									<Input type="email" name="email" id="email" />
+								</label>
+
+								<Button type="submit" className="block mt-4 w-full">
+									Grant admin access
+								</Button>
+							</form>
+							<form action={burl + "/api/admin/remove"} method="POST">
+								<label htmlFor="adminEmail" className="block mt-4 w-full">
+									User
+									<Select name="email">
+										<SelectTrigger>
+											<SelectValue placeholder="Admin" />
+										</SelectTrigger>
+										<SelectContent>
+											{admins.map((admin: any, key: Key) => (
+												<SelectItem key={key} value={admin.email}>
+													{admin.email}
+												</SelectItem>
+											))}
+										</SelectContent>
+									</Select>
+								</label>
+
+								<Button
+									type="submit"
+									className="block mt-4 w-full bg-red-500 hover:bg-red-700"
+								>
+									Revoke admin access
+								</Button>
+							</form>
+						</div>
+					</div>
+				</Card>
 				<Card>
 					<div id="body" className="p-4">
 						<div className="flex items-center">
@@ -58,7 +114,7 @@ export default async function Home() {
 					</div>
 				</Card>
 
-				<Card>
+				<Card className="col-span-2">
 					<div id="body" className="p-4">
 						<div className="flex items-center">
 							<Activity className="mr-2" />

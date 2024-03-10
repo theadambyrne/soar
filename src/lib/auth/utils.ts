@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getPageSession } from "@/lib/auth/lucia";
 
-
 export type AuthSession = {
 	session: {
 		user: {
@@ -42,5 +41,5 @@ export const checkAdmin = async () => {
 export const isAdmin = async () => {
 	const session = await getPageSession();
 	if (!session) return false;
-	return session.user?.role === "admin";
+	return session.user?.role == "admin";
 };
