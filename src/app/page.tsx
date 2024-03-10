@@ -5,7 +5,7 @@
  */
 import Link from "next/link";
 import Image from "next/image";
-import { Send, Network, Zap, CircuitBoard, Construction } from "lucide-react";
+import { Send, Network, Zap, CircuitBoard, SatelliteDish } from "lucide-react";
 import { getUserAuth } from "@/lib/auth/utils";
 
 import SignOutLink from "@/components/auth/SignOutLink";
@@ -81,10 +81,10 @@ export default async function Component() {
 
 									<Link
 										className="flex items-center gap-2 text-neutral-500 hover:text-neutral-600 dark:text-neutral-400 dark:hover:text-neutral-300 ml-5"
-										href="/roadmap"
+										href="mailto:adamrbyrne@gmail.com&subject=Soar%20Sales%20Enquiry"
 									>
-										<Construction size={24} />
-										<span>Follow our roadmap</span>
+										<SatelliteDish size={24} />
+										<span>Contact sales</span>
 									</Link>
 								</div>
 							</div>
