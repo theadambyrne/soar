@@ -91,7 +91,7 @@ export default async function Component() {
 						</div>
 					</div>
 				</section>
-				<section id="products" className="w-full">
+				<section id="products" className="w-full mt-20">
 					<div className="container px-4 md:px-6">
 						<div className="flex flex-col items-center justify-center space-y-4 text-center">
 							<div className="space-y-2">
@@ -104,12 +104,18 @@ export default async function Component() {
 								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
 									Blackbox for drone flight, low flying aircraft, and model
 									rockets. The device records motion data in flight and on
-									retrieval sends the data to your Soar Dashboard. 
+									retrieval sends the data to your Soar Dashboard.
 								</p>
 							</div>
 						</div>
 						<div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-10">
-							<div className="mx-auto aspect-video overflow-hidden rounded-xl bg-neutral-100 object-cover object-center sm:w-full lg:order-last dark:bg-neutral-800" />
+							<Image
+								src="/blackbox.png"
+								alt="Blackbox"
+								width={500}
+								height={500}
+								className="mx-auto rounded-xl sm:w-full lg:order-last dark:bg-neutral-900"
+							/>
 							<div className="flex flex-col justify-center space-y-4">
 								<ul className="grid gap-6">
 									<li>
@@ -140,8 +146,8 @@ export default async function Component() {
 												<h3 className="text-xl font-bold">Communication</h3>
 											</div>
 											<p className="text-neutral-500 dark:text-neutral-400 mt-1">
-												You can use a normal network or a phone hotspot via a 2.4GHz Wi-Fi module to connect to the
-												cloud
+												You can use a normal network or a phone hotspot via a
+												2.4GHz Wi-Fi module to connect to the cloud
 											</p>
 										</div>
 									</li>
@@ -159,6 +165,33 @@ export default async function Component() {
 									</li>
 								</ul>
 							</div>
+						</div>
+					</div>
+				</section>
+
+				<section id="products" className="w-full mt-20">
+					<div className="container px-4 md:px-6">
+						<div className="flex flex-col items-center justify-center space-y-4 text-center">
+							<div className="space-y-2">
+								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+									Your Dashboard
+								</h2>
+								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
+									Manage your devices, flight data and more from your Soar
+									Dashboard powered by our Craft to Cloud technology. Get
+									meaningful visual insights and access to your raw data as
+									recorded.
+								</p>
+							</div>
+						</div>
+						<div className="flex flex-col justify-center space-y-4">
+							<Image
+								src="/dash.jpeg"
+								alt="Dashboard"
+								width={600}
+								height={400}
+								className="mx-auto rounded-xl sm:w-full lg:order-last dark:bg-neutral-900 m-10"
+							/>
 						</div>
 					</div>
 				</section>
