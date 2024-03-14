@@ -7,6 +7,7 @@ import { Bucket } from "sst/node/bucket";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getMessages } from "@/lib/api/messages/queries";
+import { Bucket as S3Bucket } from "aws-cdk-lib/aws-s3";
 
 const uploadFile = async (url: string, file: File, filename: String) => {
 	const image = await fetch(url, {
@@ -41,10 +42,12 @@ export async function POST(request: Request) {
 		return;
 	}
 
+	const bucket = Bucket.public as S3Bucket;
+
 	const command = new PutObjectCommand({
 		ACL: "public-read",
 		Key: crypto.randomUUID(),
-		Bucket: Bucket.public.bucketName,
+		Bucket: Bucket.bucketName,
 	});
 
 	const url = await getSignedUrl(new S3Client({}), command);
