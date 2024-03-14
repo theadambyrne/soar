@@ -26,7 +26,7 @@ import { getBaseUrl } from "@/lib/trpc/utils";
 
 export default async function Home() {
 	await checkAdmin();
-	const host = getBaseUrl();
+	const host =  getBaseUrl();
 
 	const { userCount, flightCount, messagesTW, messages, admins } = await fetch(
 		`${host}/api/admin`
