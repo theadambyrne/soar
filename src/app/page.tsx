@@ -15,9 +15,9 @@ export default async function Component() {
 	const session = await getUserAuth();
 	const host = getBaseUrl();
 
-	const { banner } = await fetch(`${host}/api/banners`).then((res) =>
-		res.json()
-	);
+	const { banner } = await fetch(`${host}/api/banners`)
+		.then((res) => res.json())
+		.catch(() => ({ banner: null }));
 
 	return (
 		<div className="flex min-h-screen flex-col">
