@@ -49,7 +49,10 @@ export default async function Home() {
 						</div>
 
 						<div className="grid grid-cols-2 gap-4 mt-8">
-							<form action={burl + "/api/admin/add"} method="POST">
+							<form
+								action={`https://${process.env.VERCEL_URL}/api/admin/add`}
+								method="POST"
+							>
 								<label htmlFor="email" className="block mt-4 w-full">
 									Email
 									<Input type="email" name="email" id="email" />
@@ -59,7 +62,10 @@ export default async function Home() {
 									Grant admin access
 								</Button>
 							</form>
-							<form action={burl + "/api/admin/remove"} method="POST">
+							<form
+								action={`https://${process.env.VERCEL_URL}/api/admin/remove`}
+								method="POST"
+							>
 								<label htmlFor="adminEmail" className="block mt-4 w-full">
 									User
 									<Select name="email">
