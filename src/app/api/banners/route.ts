@@ -27,10 +27,6 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
 	const { banners } = await getBanners();
 
-	if (banners.length === 0) {
-		return NextResponse.json({ banner: null }, { status: 200 });
-	} else {
-		const banner = banners[0];
-		return NextResponse.json({ banner }, { status: 200 });
-	}
+	const banner = banners[banners.length - 1];
+	return NextResponse.json({ banner });
 }

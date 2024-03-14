@@ -32,11 +32,13 @@ export default async function Home() {
 		`${host}/api/admin`
 	).then((res) => res.json());
 
-	// messages.messages.sort((a: any, b: any) => {
-	// 	const dateA = new Date(a.createdAt);
-	// 	const dateB = new Date(b.createdAt);
-	// 	return dateB.getTime() - dateA.getTime();
-	// });
+	if (messages) {
+		messages.messages.sort((a: any, b: any) => {
+			const dateA = new Date(a.createdAt);
+			const dateB = new Date(b.createdAt);
+			return dateB.getTime() - dateA.getTime();
+		});
+	}
 
 	return (
 		<main>
