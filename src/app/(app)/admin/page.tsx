@@ -22,12 +22,14 @@ import { checkAdmin } from "@/lib/auth/utils";
 import { Activity, DownloadCloud, Users } from "lucide-react";
 import Link from "next/link";
 import { Key } from "react";
+import { getBaseUrl } from "@/lib/trpc/utils";
 
 export default async function Home() {
 	await checkAdmin();
+	const host = getBaseUrl();
 
 	const { userCount, flightCount, messagesTW, messages, admins } = await fetch(
-		`https://${process.env.VERCEL_URL}/api/admin`
+		`${host}/api/admin`
 	).then((res) => res.json());
 
 	messages.messages.sort((a: any, b: any) => {
@@ -49,10 +51,7 @@ export default async function Home() {
 						</div>
 
 						<div className="grid grid-cols-2 gap-4 mt-8">
-							<form
-								action={`https://${process.env.VERCEL_URL}/api/admin/add`}
-								method="POST"
-							>
+							<form action={`${host}/api/admin/add`} method="POST">
 								<label htmlFor="email" className="block mt-4 w-full">
 									Email
 									<Input type="email" name="email" id="email" />
@@ -62,10 +61,7 @@ export default async function Home() {
 									Grant admin access
 								</Button>
 							</form>
-							<form
-								action={`https://${process.env.VERCEL_URL}/api/admin/remove`}
-								method="POST"
-							>
+							<form action={`${host}/api/admin/remove`} method="POST">
 								<label htmlFor="adminEmail" className="block mt-4 w-full">
 									User
 									<Select name="email">
