@@ -41,7 +41,7 @@
     "lucia": "2.7.7",
     "lucide-react": "^0.323.0",
     "nanoid": "^5.0.5",
-    "next": "14.1.0",
+    "next": "latest",
     "next-themes": "^0.2.1",
     "react": "^18",
     "react-day-picker": "^8.10.0",
