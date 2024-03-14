@@ -19,7 +19,7 @@ import {
 
 import { checkAdmin } from "@/lib/auth/utils";
 
-import { Activity, DownloadCloud, Users } from "lucide-react";
+import { Activity, DownloadCloud, Users, CircleFadingPlus } from "lucide-react";
 import Link from "next/link";
 import { Key } from "react";
 import { getBaseUrl } from "@/lib/trpc/utils";
@@ -39,10 +39,35 @@ export default async function Home() {
 	});
 
 	return (
-		<main className="">
+		<main>
 			<h1 className="text-3xl font-semibold my-2">Admin</h1>
 
 			<div className="grid grid-cols-2 gap-4 my-10 wrap-cols">
+				<Card>
+					<div id="body" className="p-4">
+						<div className="flex items-center">
+							<Activity className="mr-2" />
+							<h3 className="text-2xl font-semibold">Activity</h3>
+						</div>
+
+						<div className="grid grid-cols-3  items-center justify-center">
+							<div className="p-8">
+								<h3 className="text-2xl font-semibold">Users</h3>
+								<p className="text-6xl font-bold mt-2">{userCount}</p>
+							</div>
+							<div className="p-8">
+								<h3 className="text-2xl font-semibold">Flights</h3>
+								<p className="text-6xl font-bold mt-2">{flightCount}</p>
+							</div>
+							<div className="p-8">
+								<h3 className="text-2xl font-semibold">
+									Support (last 7 days)
+								</h3>
+								<p className="text-6xl font-bold mt-2">{messagesTW}</p>
+							</div>
+						</div>
+					</div>
+				</Card>
 				<Card>
 					<div id="body" className="p-4">
 						<div className="flex items-center">
@@ -88,33 +113,38 @@ export default async function Home() {
 						</div>
 					</div>
 				</Card>
+
 				<Card>
 					<div id="body" className="p-4">
 						<div className="flex items-center">
-							<Activity className="mr-2" />
-							<h3 className="text-2xl font-semibold">Activity</h3>
+							<CircleFadingPlus className="mr-2" />
+							<h3 className="text-2xl font-semibold">CMS</h3>
 						</div>
 
-						<div className="grid grid-cols-3  items-center justify-center">
-							<div className="p-8">
-								<h3 className="text-2xl font-semibold">Users</h3>
-								<p className="text-6xl font-bold mt-2">{userCount}</p>
-							</div>
-							<div className="p-8">
-								<h3 className="text-2xl font-semibold">Flights</h3>
-								<p className="text-6xl font-bold mt-2">{flightCount}</p>
-							</div>
-							<div className="p-8">
-								<h3 className="text-2xl font-semibold">
-									Support (last 7 days)
-								</h3>
-								<p className="text-6xl font-bold mt-2">{messagesTW}</p>
-							</div>
-						</div>
+						<form action={`${host}/api/banners`} method="POST">
+							<label htmlFor="title" className="block mt-4 w-full">
+								Title
+								<Input type="text" name="title" id="title" required />
+							</label>
+
+							<label htmlFor="content" className="block mt-4 w-full">
+								Content
+								<Input type="text" name="content" id="content" required />
+							</label>
+
+							<label htmlFor="color" className="block mt-4 w-full">
+								Banner Colour
+								<Input type="color" name="color" id="color" required />
+							</label>
+
+							<Button type="submit" className="block mt-4 w-full">
+								Update
+							</Button>
+						</form>
 					</div>
 				</Card>
 
-				<Card className="col-span-2">
+				<Card>
 					<div id="body" className="p-4">
 						<div className="flex items-center">
 							<Activity className="mr-2" />

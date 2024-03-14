@@ -50,6 +50,13 @@
       "when": 1709720214256,
       "tag": "0006_smart_masque",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1710412266520,
+      "tag": "0007_classy_hex",
+      "breakpoints": true
     }
   ]
 }

@@ -7,11 +7,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Send, Network, Zap, CircuitBoard, SatelliteDish } from "lucide-react";
 import { getUserAuth } from "@/lib/auth/utils";
+import { getBaseUrl } from "@/lib/trpc/utils";
 
 import SignOutLink from "@/components/auth/SignOutLink";
 
 export default async function Component() {
 	const session = await getUserAuth();
+	const host = getBaseUrl();
+
+	const { banner } = await fetch(`${host}/api/banners`).then((res) =>
+		res.json()
+	);
 
 	return (
 		<div className="flex min-h-screen flex-col">
@@ -50,6 +56,15 @@ export default async function Component() {
 				</nav>
 			</header>
 			<main className="flex-1">
+				{banner && (
+					<div
+						className="text-neutral-50 p-4 flex justify-center"
+						style={{ backgroundColor: banner.color }}
+					>
+						<b>{banner.title}&nbsp;|&nbsp;</b> {banner.content}
+					</div>
+				)}
+
 				<section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
 					<div className="container px-4 md:px-6">
 						<div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
@@ -59,6 +74,7 @@ export default async function Component() {
 								width={400}
 								height={400}
 								className="mx-auto aspect-video overflow-hidden rounded-xl object-fill sm:w-full lg:order-last lg:aspect-square dark:invert"
+								priority={true}
 							/>
 							<div className="flex flex-col justify-center space-y-4">
 								<div className="space-y-2">
