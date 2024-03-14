@@ -37,6 +37,10 @@ export async function POST(request: Request) {
 	const user_id = session.user.userId;
 	const file = formBody.get("file") as File;
 
+	if (!("public" in Bucket)) {
+		return;
+	}
+
 	const command = new PutObjectCommand({
 		ACL: "public-read",
 		Key: crypto.randomUUID(),
