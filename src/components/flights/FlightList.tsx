@@ -12,6 +12,8 @@ export default function FlightList({ flights }: { flights: CompleteFlight[] }) {
 
 	if (f.flights.length === 0) {
 		return <EmptyState />;
+	} else {
+		f.flights.sort((a, b) => b.recordedAt.getTime() - a.recordedAt.getTime());
 	}
 
 	return (
