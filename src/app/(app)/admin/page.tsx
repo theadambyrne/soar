@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/select";
 
 import { checkAdmin } from "@/lib/auth/utils";
-import { getBaseUrl } from "@/lib/trpc/utils";
 
 import { Activity, DownloadCloud, Users } from "lucide-react";
 import Link from "next/link";
@@ -26,10 +25,9 @@ import { Key } from "react";
 
 export default async function Home() {
 	await checkAdmin();
-	const burl = getBaseUrl();
 
 	const { userCount, flightCount, messagesTW, messages, admins } = await fetch(
-		burl + "/api/admin"
+		`https://${process.env.VERCEL_URL}/api/admin`
 	).then((res) => res.json());
 
 	messages.messages.sort((a: any, b: any) => {
