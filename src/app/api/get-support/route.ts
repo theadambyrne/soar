@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 	const command = new PutObjectCommand({
 		ACL: "public-read",
 		Key: crypto.randomUUID(),
-		Bucket: Bucket.bucketName,
+		Bucket: bucket.bucketName,
 	});
 
 	const url = await getSignedUrl(new S3Client({}), command);
