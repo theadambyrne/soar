@@ -6,18 +6,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Send, Network, Zap, CircuitBoard, SatelliteDish } from "lucide-react";
-import { getUserAuth } from "@/lib/auth/utils";
-import { getBaseUrl } from "@/lib/trpc/utils";
+// import { getUserAuth } from "@/lib/auth/utils";
+// import { getBaseUrl } from "@/lib/trpc/utils";
 
-import SignOutLink from "@/components/auth/SignOutLink";
+// import SignOutLink from "@/components/auth/SignOutLink";
 
 export default async function Component() {
-	const session = await getUserAuth();
-	const host = getBaseUrl();
+	// const session = await getUserAuth();
+	// const host = getBaseUrl();
 
-	const { banner } = await fetch(`${host}/api/banners`).then((res) =>
-		res.json()
-	);
+	// const { banner } = await fetch(`${host}/api/banners`).then((res) =>
+	// 	res.json()
+	// );
 
 	return (
 		<div className="flex min-h-screen flex-col">
@@ -27,7 +27,7 @@ export default async function Component() {
 					<span className="ml-4 text-2xl font-semibold">Soar</span>
 				</Link>
 				<nav className="ml-auto flex gap-4 sm:gap-6">
-					{session.session ? (
+					{/* {session.session ? (
 						<>
 							<Link
 								className="text-lg font-medium underline-offset-4 hover:underline"
@@ -52,18 +52,18 @@ export default async function Component() {
 								Sign Up
 							</Link>
 						</>
-					)}
+					)} */}
 				</nav>
 			</header>
 			<main className="flex-1">
-				{banner && (
+				{/* {banner && (
 					<div
 						className="text-neutral-50 p-4 flex justify-center"
 						style={{ backgroundColor: banner.color }}
 					>
 						<b>{banner.title}&nbsp;|&nbsp;</b> {banner.content}
 					</div>
-				)}
+				)} */}
 
 				<section className="w-full py-6 sm:py-12 md:py-24 lg:py-32 xl:py-48">
 					<div className="container px-4 md:px-6">
