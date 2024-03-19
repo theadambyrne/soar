@@ -17,6 +17,11 @@ export default {
 					server: { architecture: Architecture.X86_64 },
 				},
 				runtime: "nodejs20.x",
+				environment: {
+					DATABASE_URL: process.env.DATABASE_URL!,
+					DATABASE_AUTH_TOKEN: process.env.DATABASE_AUTH_TOKEN!,
+					RESEND_API_KEY: process.env.RESEND_API_KEY!,
+				},
 			});
 
 			stack.addOutputs({
