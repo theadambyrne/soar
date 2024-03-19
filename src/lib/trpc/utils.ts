@@ -1,8 +1,8 @@
 export function getBaseUrl() {
-	if (typeof window !== "undefined") return "";
-	if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-
-	return "https://d3ru5t0bjt4sdj.cloudfront.net";
+	"use serve";
+	if (typeof window !== "undefined") return window.location.origin;
+	// return "https://d3ru5t0bjt4sdj.cloudfront.net/production";
+	return "http://localhost:3000";
 }
 
 export function getUrl() {

@@ -7,7 +7,6 @@ export default function SignOutLink() {
 	const handleSignOut = async () => {
 		const response = await fetch("/api/sign-out", {
 			method: "POST",
-			redirect: "manual",
 		});
 
 		if (response.status === 0) {

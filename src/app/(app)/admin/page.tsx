@@ -25,12 +25,25 @@ import { Key } from "react";
 import { getBaseUrl } from "@/lib/trpc/utils";
 
 export default async function Home() {
-	await checkAdmin();
-	const host =  getBaseUrl();
+	let data = {
+		userCount: 0,
+		flightCount: 0,
+		messagesTW: 0,
+		messages: { messages: [] },
+		admins: [],
+	};
+	let host = "";
 
-	const { userCount, flightCount, messagesTW, messages, admins } = await fetch(
-		`${host}/api/admin`
-	).then((res) => res.json());
+	try {
+		await checkAdmin();
+
+		 host = getBaseUrl();
+		data = await fetch(`${host}/api/admin`).then((res) => res.json());
+	} catch (e) {
+		console.error(e);
+	}
+
+	const { userCount, flightCount, messagesTW, messages, admins } = data;
 
 	if (messages) {
 		messages.messages.sort((a: any, b: any) => {
