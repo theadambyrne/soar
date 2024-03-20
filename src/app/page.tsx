@@ -12,14 +12,15 @@ import { getBaseUrl } from "@/lib/trpc/utils";
 import SignOutLink from "@/components/auth/SignOutLink";
 
 export default async function Component() {
-	let session, host, banner;
+	let session, banner;
 	try {
 		session = await getUserAuth();
-		host = getBaseUrl();
 
-		banner = await fetch(`${host}/api/banners`)
+		banner = await fetch("https://soar-mauve.vercel.app/api/banners")
 			.then((res) => res.json())
 			.then((data) => data.banner);
+
+		console.log(banner);
 	} catch (e) {
 		console.error(e);
 	}
@@ -111,6 +112,33 @@ export default async function Component() {
 						</div>
 					</div>
 				</section>
+				<section id="video" className="w-full mt-20">
+					<div className="container px-4 md:px-6">
+						<div className="flex flex-col items-center justify-center space-y-4 text-center">
+							<div className="space-y-2">
+								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
+									Watch it live
+								</h2>
+								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
+									Manage your devices, flight data and more from your Soar
+									Dashboard powered by our Craft to Cloud technology. Get
+									meaningful visual insights and access to your raw data as
+									recorded.
+								</p>
+							</div>
+						</div>
+						<div className="flex flex-col justify-center space-y-4">
+							<Image
+								src="/dash.jpeg"
+								alt="Dashboard"
+								width={600}
+								height={400}
+								className="mx-auto rounded-xl sm:w-full lg:order-last dark:bg-neutral-900 m-10"
+							/>
+						</div>
+					</div>
+				</section>
+
 				<section id="products" className="w-full mt-20">
 					<div className="container px-4 md:px-6">
 						<div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -185,33 +213,6 @@ export default async function Component() {
 									</li>
 								</ul>
 							</div>
-						</div>
-					</div>
-				</section>
-
-				<section id="products" className="w-full mt-20">
-					<div className="container px-4 md:px-6">
-						<div className="flex flex-col items-center justify-center space-y-4 text-center">
-							<div className="space-y-2">
-								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-									Your Dashboard
-								</h2>
-								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
-									Manage your devices, flight data and more from your Soar
-									Dashboard powered by our Craft to Cloud technology. Get
-									meaningful visual insights and access to your raw data as
-									recorded.
-								</p>
-							</div>
-						</div>
-						<div className="flex flex-col justify-center space-y-4">
-							<Image
-								src="/dash.jpeg"
-								alt="Dashboard"
-								width={600}
-								height={400}
-								className="mx-auto rounded-xl sm:w-full lg:order-last dark:bg-neutral-900 m-10"
-							/>
 						</div>
 					</div>
 				</section>
