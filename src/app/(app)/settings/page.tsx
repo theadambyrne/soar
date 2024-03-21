@@ -28,11 +28,9 @@ export default async function Page() {
 
 	useEffect(() => {
 		const getMessages = async () => {
-			const res = await fetch(
-				"https://soar-cfmsl6w9n-bxrne.vercel.app/api/get-support"
-			);
+			const res = await fetch("https://soar-mauve.vercel.app/api/get-support");
 			const data = await res.json();
-			setMessages(data.messages);
+			setMessages(data);
 		};
 		getMessages();
 	}, []);

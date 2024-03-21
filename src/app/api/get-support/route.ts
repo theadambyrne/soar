@@ -8,7 +8,7 @@ import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import { createMessage, getMessages } from "@/lib/api/messages/queries";
 
 const uploadFile = async (url: string, file: File, filename: String) => {
-	const image = await fetch(url, {
+	const obj = await fetch(url, {
 		body: file,
 		method: "PUT",
 		headers: {
@@ -17,7 +17,7 @@ const uploadFile = async (url: string, file: File, filename: String) => {
 		},
 	});
 
-	return image.url.split("?")[0];
+	return obj.url.split("?")[0];
 };
 
 export async function POST(request: Request) {

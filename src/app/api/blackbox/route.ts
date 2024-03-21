@@ -5,7 +5,7 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 
 const uploadFile = async (url: string, file: File, filename: String) => {
-	const image = await fetch(url, {
+	const obj = await fetch(url, {
 		body: file,
 		method: "PUT",
 		headers: {
@@ -14,7 +14,7 @@ const uploadFile = async (url: string, file: File, filename: String) => {
 		},
 	});
 
-	return image.url.split("?")[0];
+	return obj;
 };
 
 function combineArraysToMatrix(time: number[], alt: number[]): any[][] {
