@@ -49,7 +49,7 @@ export async function POST(request: Request) {
 	const message = {
 		content: formBody.get("message") as string,
 		filepath: res,
-		userId: "mbahjyo4rqhnv8r", // need to be linked to device post prototype :: future me enjoy!
+		userId: user_id, // need to be linked to device post prototype :: future me enjoy!
 	};
 
 	await createMessage(message);
