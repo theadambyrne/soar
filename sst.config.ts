@@ -10,9 +10,10 @@ export default {
 	},
 	stacks(app: App) {
 		app.stack(function Site({ stack }: StackContext) {
-			const bucket = new Bucket(stack, "support_files");
+			const support = new Bucket(stack, "support_files");
+			const blackbox = new Bucket(stack, "blackbox_files");
 			const site = new NextjsSite(stack, "site", {
-				bind: [bucket],
+				bind: [support, blackbox],
 				cdk: {
 					server: { architecture: Architecture.X86_64 },
 				},
