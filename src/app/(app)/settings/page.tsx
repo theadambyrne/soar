@@ -112,24 +112,21 @@ export default async function Page() {
 							</TableHeader>
 							<TableBody>
 								{messages.map(
-									(
-										ticket: {
-											createdAt: string;
-											content: string;
-											filepath: string;
-										},
-										key: Key
-									) => (
-										<TableRow key={key}>
-											<TableCell className="font-small">
-												{ticket.createdAt}
-											</TableCell>
+									({
+										createdAt,
+										content,
+										filepath,
+									}: {
+										createdAt: string;
+										content: string;
+										filepath: string;
+									}) => (
+										<TableRow key={createdAt}>
+											<TableCell className="font-small">{createdAt}</TableCell>
 
-											<TableCell className="font-small">
-												{ticket.content}
-											</TableCell>
+											<TableCell className="font-small">{content}</TableCell>
 											<TableCell className="font-small justify-center">
-												<Link href={ticket.filepath}>
+												<Link href={filepath}>
 													<DownloadCloud className="text-blue-500" />
 												</Link>
 											</TableCell>
