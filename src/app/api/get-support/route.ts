@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 	const command = new PutObjectCommand({
 		ACL: "public-read",
 		Key: crypto.randomUUID(),
-		Bucket: "support_files",
+		Bucket: "production-soar-site-supportfilesbucket99cc0b41-qkpnmahtgwl1",
 	});
 
 	const url = await getSignedUrl(new S3Client({}), command);
