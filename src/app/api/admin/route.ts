@@ -17,7 +17,7 @@ export async function GET(request: Request) {
 
 	const userRows = await db.select().from(users);
 	const userCount = userRows.length;
-
+ 
 	const flightRows = await db.select().from(flights);
 	const flightCount = flightRows.length;
 

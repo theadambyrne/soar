@@ -31,7 +31,6 @@ export async function POST(request: Request) {
 	const csv = matrixToCsv(matrix);
 	const file = new File([csv], "live-demo.csv", { type: "text/csv" });
 
-	// const bucket = Bucket.public as S3Bucket;
 	const command = new PutObjectCommand({
 		ACL: "public-read",
 		Key: crypto.randomUUID(),

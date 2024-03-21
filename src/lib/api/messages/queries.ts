@@ -36,3 +36,10 @@ export const allMessages = async () => {
 	const m = rows;
 	return { messages: m };
 };
+
+export const createMessage = async (message: any) => {
+	const m = await db.insert(messages).values({
+		...message,
+	});
+	return { message: m };
+};

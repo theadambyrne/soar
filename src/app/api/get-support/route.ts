@@ -5,7 +5,7 @@ import * as context from "next/headers";
 import crypto from "crypto";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getMessages } from "@/lib/api/messages/queries";
+import { createMessage, getMessages } from "@/lib/api/messages/queries";
 
 const uploadFile = async (url: string, file: File, filename: String) => {
 	const image = await fetch(url, {
@@ -45,6 +45,14 @@ export async function POST(request: Request) {
 	const url = await getSignedUrl(new S3Client({}), command);
 	const filename = user_id + "/" + file.name;
 	const res = await uploadFile(url, file, filename);
+
+	const message = {
+		content: formBody.get("message") as string,
+		filepath: res,
+		userId: "mbahjyo4rqhnv8r", // need to be linked to device post prototype :: future me enjoy!
+	};
+
+	await createMessage(message);
 
 	try {
 		return NextResponse.json({ res });
