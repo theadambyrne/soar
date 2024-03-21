@@ -137,7 +137,10 @@ export default async function Component() {
 									title="Innovation marketing submission"
 								></iframe>
 							</div>
-							<script src="https://player.vimeo.com/api/player.js"></script>
+							<script
+								src="https://player.vimeo.com/api/player.js"
+								defer
+							></script>
 						</div>
 					</div>
 				</section>
