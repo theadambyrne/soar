@@ -212,8 +212,8 @@ export default async function Component() {
 												<h3 className="text-xl font-bold">Power</h3>
 											</div>
 											<p className="text-neutral-500 dark:text-neutral-400 mt-1">
-												A 1000mAh LiPo battery powers the Blackbox for 2 hours.
-												You can also use a powerbank to extend the flight time
+												Connect to a 5V USB power source for charging or use a
+												LiPo shim for battery power.
 											</p>
 										</div>
 									</li>
