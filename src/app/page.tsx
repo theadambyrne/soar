@@ -7,7 +7,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { Send, Network, Zap, CircuitBoard, SatelliteDish } from "lucide-react";
 import { getUserAuth } from "@/lib/auth/utils";
-import { getBaseUrl } from "@/lib/trpc/utils";
 
 import SignOutLink from "@/components/auth/SignOutLink";
 
@@ -19,15 +18,13 @@ export default async function Component() {
 		banner = await fetch("https://soar-mauve.vercel.app/api/banners")
 			.then((res) => res.json())
 			.then((data) => data.banner);
-
-		console.log(banner);
 	} catch (e) {
 		console.error(e);
 	}
 	return (
 		<div className="flex min-h-screen flex-col">
 			<header className="flex h-20 items-center px-4 lg:px-6">
-				<Link className="flex items-center justify-center" href="#">
+				<Link className="flex items-center justify-center" href="/">
 					<Send className="h-6 w-6" />
 					<span className="ml-4 text-2xl font-semibold">Soar</span>
 				</Link>
@@ -61,12 +58,12 @@ export default async function Component() {
 				</nav>
 			</header>
 			<main className="flex-1">
-				{banner && banner.banner && (
+				{banner && (
 					<div
 						className="text-neutral-50 p-4 flex justify-center"
-						style={{ backgroundColor: banner.banner.color }}
+						style={{ backgroundColor: banner.color }}
 					>
-						<b>{banner.banner.title}&nbsp;|&nbsp;</b> {banner.banner.content}
+						<b>{banner.title}&nbsp;|&nbsp;</b> {banner.content}
 					</div>
 				)}
 
@@ -112,29 +109,35 @@ export default async function Component() {
 						</div>
 					</div>
 				</section>
-				<section id="video" className="w-full mt-20">
+				<section id="video" className="w-full">
 					<div className="container px-4 md:px-6">
 						<div className="flex flex-col items-center justify-center space-y-4 text-center">
 							<div className="space-y-2">
-								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-									Watch it live
+								<h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight mb-5">
+									Our customers love Soar
 								</h2>
-								<p className="max-w-[900px] text-neutral-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-neutral-400">
-									Manage your devices, flight data and more from your Soar
-									Dashboard powered by our Craft to Cloud technology. Get
-									meaningful visual insights and access to your raw data as
-									recorded.
-								</p>
 							</div>
 						</div>
-						<div className="flex flex-col justify-center space-y-4">
-							<Image
-								src="/dash.jpeg"
-								alt="Dashboard"
-								width={600}
-								height={400}
-								className="mx-auto rounded-xl sm:w-full lg:order-last dark:bg-neutral-900 m-10"
-							/>
+						<div className="flex flex-col justify-center space-y-4 w-1/2 mx-auto my-5">
+							<div
+								style={{ padding: "56.25% 0 0 0", position: "relative" }}
+								className=""
+							>
+								<iframe
+									src="https://player.vimeo.com/video/925564713?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479"
+									allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+									style={{
+										position: "absolute",
+										top: 0,
+										left: 0,
+										width: "100%",
+										height: "100%",
+										border: 0,
+									}}
+									title="Innovation marketing submission"
+								></iframe>
+							</div>
+							<script src="https://player.vimeo.com/api/player.js"></script>
 						</div>
 					</div>
 				</section>

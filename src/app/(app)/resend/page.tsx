@@ -20,7 +20,6 @@ export default function Home() {
         name: nameInputRef.current?.value,
         email: emailInputRef.current?.value,
       });
-      console.log(payload);
       const req = await fetch("/api/email", {
         method: "POST",
         body: JSON.stringify(payload),
