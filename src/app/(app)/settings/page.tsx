@@ -40,7 +40,7 @@ export default async function Page() {
 			<h1 className="text-2xl font-semibold">Settings</h1>
 			<div className="space-y-4 my-4">
 				<div>
-					<h3 className="text-lg font-medium">Support</h3>
+					<h3 className="text-lg font-medium">Support & Feedback</h3>
 					<p className="text-sm text-muted-foreground">
 						Something not quite right? Contact support and upload related
 						artefacts.
